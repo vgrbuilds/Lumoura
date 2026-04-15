@@ -8,14 +8,17 @@ from src.api.account import router as account_router
 from src.api.auth import router as auth_router
 from src.api.billing import router as billing_router
 from src.api.research import router as research_router
-from src.core.config import CORS_ORIGINS
+from src.core.config import CORS_ALLOW_VERCEL_PREVIEWS, CORS_ORIGINS, CORS_VERCEL_PREVIEW_REGEX
 
 
 app = FastAPI(title="Lumoura Research API", version="0.1.0")
 
+allow_origins = ["*"] if "*" in CORS_ORIGINS else CORS_ORIGINS
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ORIGINS,
+    allow_origins=allow_origins,
+    allow_origin_regex=CORS_VERCEL_PREVIEW_REGEX if CORS_ALLOW_VERCEL_PREVIEWS else None,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
