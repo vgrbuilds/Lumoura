@@ -24,6 +24,16 @@ SUBSCRIPTION_PLAN_INTERVAL = int(os.getenv("SUBSCRIPTION_PLAN_INTERVAL", "1"))
 SUBSCRIPTION_TOTAL_COUNT = int(os.getenv("SUBSCRIPTION_TOTAL_COUNT", "12"))
 SUBSCRIPTION_CURRENCY = os.getenv("SUBSCRIPTION_CURRENCY", "INR")
 CORS_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "*").split(",") if origin.strip()]
+CORS_ALLOW_VERCEL_PREVIEWS = os.getenv("CORS_ALLOW_VERCEL_PREVIEWS", "true").lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
+CORS_VERCEL_PREVIEW_REGEX = os.getenv(
+    "CORS_VERCEL_PREVIEW_REGEX",
+    r"^https://.*\.vercel\.app$",
+)
 CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
 CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
 CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
